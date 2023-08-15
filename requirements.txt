@@ -1,3 +1,4 @@
 astropy
+click
 numpy
 pandas
