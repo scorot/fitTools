@@ -16,13 +16,14 @@ def fits_library(dirname: str, csv: str) -> None:
     for root, dirs, files in os.walk(dirname,
                                      topdown=False):
         for name in files:
-            if os.path.join(root, name).endswith("fit"):
-                # print(os.path.join(root, name))
-                fits_file = os.path.join(root, name)
-                d = dict(fits.getheader(fits_file))
-                d.update({'FILENAME': name})
-                d.update({'DIRNAME': root})
-                fits_array.append(dict(d))
+            # print(os.path.join(root, name))
+            if not os.path.join(root, name).endswith("fit") and not os.path.join(root, name).endswith("fits"):
+                continue
+            fits_file = os.path.join(root, name)
+            d = dict(fits.getheader(fits_file))
+            d.update({'FILENAME': name})
+            d.update({'DIRNAME': root})
+            fits_array.append(dict(d))
 
     if len(fits_array) != 0:
         df = pd.DataFrame(fits_array)
