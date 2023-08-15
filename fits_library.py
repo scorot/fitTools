@@ -46,6 +46,8 @@ def fits_library(dirname: str, csv: str) -> None:
         df['OBJECT'] = df['OBJECT'].str.strip()
         # df["OBJECT"].fillna('empty', inplace = True)
         df['OBJECT'] = np.where(df['OBJECT'].isnull(), df['OBJECT_'], df['OBJECT'])
+        df['OBJECT'] = df['OBJECT'].str.replace('_', '')
+        df['OBJECT'] = df['OBJECT'].str.upper()
 
         # Delete useless columns
         df.drop(['Col1', 'Object1', 'Col2', 'OBJECT_'], axis=1, inplace=True)
